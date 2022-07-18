@@ -50,10 +50,10 @@ const AdminDashboardPage = () => {
 
   return (
     <>
+      <button type='button' className='bg-white logout-btn' onClick={logout}>
+        Logout
+      </button>
       <div className='w-full flex justify-center items-center text-gray-700 dashboard'>
-        <button type='button' className='bg-white logout-btn' onClick={logout}>
-          Logout
-        </button>
         <table className='video_table'>
           <thead>
             <th>id</th>
@@ -80,15 +80,15 @@ const AdminDashboardPage = () => {
             ))}
           </tbody>
         </table>
-        <div className='pagination'>
-          <button type='button' className='bg-white' onClick={prevPage}>
-            Previous
-          </button>
+      </div>
+      <div className='pagination'>
+        <button type='button' className='bg-white' onClick={prevPage}>
+          Previous
+        </button>
 
-          <button type='button' className='bg-white' onClick={nextPage}>
-            Next
-          </button>
-        </div>
+        <button type='button' className='bg-white' onClick={nextPage}>
+          Next
+        </button>
       </div>
     </>
   )
