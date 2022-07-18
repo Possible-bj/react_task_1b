@@ -24,6 +24,10 @@ function renderRoutes(role) {
             path='/'
             exact
             element={<Navigate replace to='/admin/login' />}></Route>
+          <Route
+            path='/admin/dashboard'
+            exact
+            element={<Navigate replace to='/admin/login' />}></Route>
           <Route exact path='/admin/login' element={<AdminLoginPage />}></Route>
           <Route path='*' exact element={<NotFoundPage />}></Route>
         </Routes>

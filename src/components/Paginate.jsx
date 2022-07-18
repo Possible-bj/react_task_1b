@@ -1,6 +1,6 @@
 import React from 'react'
 
-const Paginate = ({ pages }) => {
+const Paginate = ({ pages, setPage }) => {
   return pages > 1 ? (
     <>
       {[...Array(pages).keys()].map((x) => (
