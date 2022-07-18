@@ -43,13 +43,11 @@ export default function MkdSDK() {
     return this._baseurl
   }
 
-  // Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxLCJyb2xlIjoiYWRtaW4iLCJpYXQiOjE2NTgxNjk4ODUsImV4cCI6MTY1ODE3MzQ4NX0.AsWIrxwItQh4r8QW6Y2MyomJbhca9Qq4-Y1kj3hjZXM`,
   this.callRestAPI = async function (payload, method) {
     const header = {
       'Content-Type': 'application/json',
       'x-project':
         'cmVhY3R0YXNrOjVmY2h4bjVtOGhibzZqY3hpcTN4ZGRvZm9kb2Fjc2t5ZQ==',
-      // 'x-project': base64Encode,
       Authorization: `Bearer ${localStorage.getItem('token')}`,
     }
     console.log(localStorage.getItem('token'))

@@ -7,18 +7,121 @@ body {
   -moz-osx-font-smoothing: grayscale;
   background: #000 !important;
 }
+.dashboard {
+  position: relative;
+  width: 100% !important;
+  padding: 20px !important;
+  /* border: 1px solid grey; */
+}
+.nav-bar-top {
+  position: relative;
+  display: flex;
+  width: 80%;
+  margin: auto;
+  /* border: 1px solid grey; */
+}
+.title {
+  color: #fff;
+  font-size: 44px;
+  font-weight: 900;
+}
 .logout-btn {
   position: absolute;
   margin: auto;
-  width: 60px;
-  top: 10px;
+  width: 80px;
+  top: 5px;
+  padding: 10px;
   left: auto;
-  right: 10px;
+  right: 0;
+  background-color: greenyellow !important;
+  border-radius: 50px;
 }
-.video_table {
+.card {
   position: relative;
-  width: 100%;
-  height: 80vh;
+  display: flex;
+  width: 80%;
+  padding: 5px;
+  margin: 10px auto;
+  border-radius: 10px;
+  border: 1px solid grey;
+  align-content: center;
+  color: #fff;
+}
+.card div {
+  position: relative;
+  padding: 10px;
+  align-self: center;
+}
+.card img {
+  position: relative;
+  width: 100px;
+  height: 50px;
+  margin: auto 5px;
+  border-radius: 10px;
+}
+.video-headers {
+  position: relative;
+  display: flex;
+  width: 80%;
+  padding: 5px;
+  margin: 10px auto;
+  color: grey;
+}
+.heading {
+  position: relative;
+  width: 80%;
+  padding: 5px;
+  margin: auto;
+  font-size: 44px;
+}
+
+.video-sn-header {
+  padding: 10px;
+  align-self: center;
+}
+
+.video-image-header {
+  position: relative;
+  width: 100px;
+  height: 50px;
+  margin: auto 5px;
+}
+.video-like {
+  margin: auto;
+  position: absolute;
+  /* border: 1px solid grey; */
+  float: right;
+  right: 0;
+  top: 0;
+  bottom: 0;
+}
+.video-like-header {
+  margin: auto;
+  padding: 10px;
+  position: absolute;
+  right: 15px;
+  top: 0;
+  bottom: 0;
+}
+.video-title {
+  width: 40%;
+}
+.video-title-header {
+  width: 40%;
+}
+.video-author {
+  margin: auto;
+  color: greenyellow !important;
+  width: 30%;
+}
+.video-author-header {
+  position: absolute;
+  right: 0;
+  left: auto;
+  top: 5px;
+  bottom: 0;
+  margin: auto;
+  width: 30%;
 }
 
 code {
@@ -32,6 +135,8 @@ code {
 .pagination > button {
   width: 100px;
   margin: auto;
+  background-color: greenyellow !important;
+  border-radius: 50px;
 }
 
 @tailwind base;

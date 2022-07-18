@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import MkdSDK from '../utils/MkdSDK'
 import { useNavigate } from 'react-router-dom'
 import { AuthContext, tokenExpireError } from '../authContext'
+import Card from '../components/Card'
 
 const AdminDashboardPage = () => {
   let sdk = new MkdSDK()
@@ -50,36 +51,33 @@ const AdminDashboardPage = () => {
 
   return (
     <>
-      <button type='button' className='bg-white logout-btn' onClick={logout}>
-        Logout
-      </button>
-      <div className='w-full flex justify-center items-center text-gray-700 dashboard'>
-        <table className='video_table'>
-          <thead>
-            <th>id</th>
-            <th>title</th>
-            <th>photo</th>
-            <th>user id</th>
-            <th>username</th>
-            <th>create at</th>
-            <th>updated at </th>
-            <th>like</th>
-          </thead>
-          <tbody>
-            {videos.map((video, index) => (
-              <tr key={index + 1}>
-                <td>{video.id}</td>
-                <td>{video.title}</td>
-                <td>{video.photo}</td>
-                <td>{video.user_id}</td>
-                <td>{video.username}</td>
-                <td>{video.create_at}</td>
-                <td>{video.update_at} </td>
-                <td>{video.like}</td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
+      <div className='nav-bar-top'>
+        <div className='title'>
+          <h1>APP</h1>
+        </div>
+        <button type='button' className='bg-white logout-btn' onClick={logout}>
+          Logout
+        </button>
+      </div>
+      <div className='heading text-white'>
+        <h1>Videos</h1>
+      </div>
+      <div className='text-gray-700 dashboard'>
+        {/* <div className='video_card'> */}
+        <div className='video-headers'>
+          <div className='video-sn-header'>#</div>
+          <div className='video-image-header'></div>
+          <div className='video-title-header'>Title</div>
+          <div className='video-author-header'>Author</div>
+          <div className='video-like-header'>
+            Most Like <i></i>
+          </div>
+        </div>
+
+        {videos.map((video, index) => (
+          <Card key={index + 1} video={video} />
+        ))}
+        {/* </div> */}
       </div>
       <div className='pagination'>
         <button type='button' className='bg-white' onClick={prevPage}>
@@ -95,4 +93,3 @@ const AdminDashboardPage = () => {
 }
 
 export default AdminDashboardPage
-// text-7xl h-screen
