@@ -17,8 +17,9 @@ const reducer = (state, action) => {
       localStorage.setItem('user', JSON.stringify(action.payload))
       return {
         ...state,
-        ...action.payload,
+        user: action.payload,
         isAuthenticated: true,
+        role: action.payload.role,
       }
     case 'LOGOUT':
       localStorage.clear()

@@ -31,7 +31,7 @@ const AdminLoginPage = () => {
     //TODO
     const user = await sdk.login(data.email, data.password, 'admin')
     if (user && !user.error) {
-      // localStorage.setItem('role', user.role)
+      localStorage.setItem('role', user.role)
       dispatch({ type: 'LOGIN', payload: user })
       showToast(dispatch, 'Login Success')
       navigate('/admin/dashboard')
