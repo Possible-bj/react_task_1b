@@ -13,16 +13,23 @@ const AdminDashboardPage = () => {
   const [limit, setLimit] = useState(10)
   const [numPages, setNumPages] = useState(1)
 
-  useEffect(async () => {
-    const role = localStorage.getItem('role')
-    const tokenValidlity = await sdk.check(role)
-    if (tokenValidlity.error) {
-      tokenExpireError(dispatch, 'TOKEN_EXPIRED')
-    }
-    sdk.setTable('video')
-    const data = await sdk.callRestAPI({ payload: {}, page, limit }, 'PAGINATE')
-    setVideos((prevState) => [...data.list])
-    setNumPages(data.num_pages)
+  useEffect(() => {
+    ;(async function () {
+      const role = localStorage.getItem('role')
+      const tokenValidlity = await sdk.check(role)
+      if (tokenValidlity.error) {
+        tokenExpireError(dispatch, 'TOKEN_EXPIRED')
+      }
+    })()
+    ;(async function fetchData() {
+      sdk.setTable('video')
+      const data = await sdk.callRestAPI(
+        { payload: {}, page, limit },
+        'PAGINATE',
+      )
+      setVideos((prevState) => [...data.list])
+      setNumPages(data.num_pages)
+    })()
   }, [dispatch, page, limit])
 
   const nextPage = () => {
@@ -43,8 +50,8 @@ const AdminDashboardPage = () => {
 
   return (
     <>
-      <div className='w-full flex justify-center items-center text-gray-700 '>
-        <button type='button' className='bg-white' onClick={logout}>
+      <div className='w-full flex justify-center items-center text-gray-700 dashboard'>
+        <button type='button' className='bg-white logout-btn' onClick={logout}>
           Logout
         </button>
         <table className='video_table'>
