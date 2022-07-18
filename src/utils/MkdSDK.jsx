@@ -43,13 +43,16 @@ export default function MkdSDK() {
     return this._baseurl
   }
 
+  // Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxLCJyb2xlIjoiYWRtaW4iLCJpYXQiOjE2NTgxNjk4ODUsImV4cCI6MTY1ODE3MzQ4NX0.AsWIrxwItQh4r8QW6Y2MyomJbhca9Qq4-Y1kj3hjZXM`,
   this.callRestAPI = async function (payload, method) {
     const header = {
       'Content-Type': 'application/json',
-      'x-project': base64Encode,
-      Authorization: 'Bearer ' + localStorage.getItem('token'),
+      'x-project':
+        'cmVhY3R0YXNrOjVmY2h4bjVtOGhibzZqY3hpcTN4ZGRvZm9kb2Fjc2t5ZQ==',
+      // 'x-project': base64Encode,
+      Authorization: `Bearer ${localStorage.getItem('token')}`,
     }
-
+    console.log(localStorage.getItem('token'))
     switch (method) {
       case 'GET':
         const getResult = await fetch(
@@ -78,14 +81,12 @@ export default function MkdSDK() {
         if (!payload.limit) {
           payload.limit = 10
         }
-        const paginateResult = await fetch(
-          this._baseurl + `/v1/api/rest/${this._table}/${method}`,
-          {
-            method: 'post',
-            headers: header,
-            body: JSON.stringify(payload),
-          },
-        )
+        const url = this._baseurl + `/v1/api/rest/${this._table}/${method}`
+        const paginateResult = await fetch(url, {
+          method: 'post',
+          headers: header,
+          body: JSON.stringify(payload),
+        })
         const jsonPaginate = await paginateResult.json()
 
         if (paginateResult.status === 401) {
@@ -123,7 +124,6 @@ export default function MkdSDK() {
     })
 
     const response = await result.json()
-    console.log(response.status)
     return response
   }
 }
