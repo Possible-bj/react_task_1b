@@ -105,11 +105,15 @@ export default function MkdSDK() {
     //TODO
 
     const url = this._baseurl + `/v2/api/lambda/check`
+    const user = localStorage.getItem('user')
+      ? JSON.parse(localStorage.getItem('user'))
+      : null
+    console.log(url, user)
     const header = {
       'content-type': 'application/json',
       'x-project':
         'cmVhY3R0YXNrOjVmY2h4bjVtOGhibzZqY3hpcTN4ZGRvZm9kb2Fjc2t5ZQ==',
-      Authorization: `Bearer `,
+      Authorization: `Bearer ${user.token}`,
     }
 
     const result = await fetch(url, {
@@ -119,6 +123,7 @@ export default function MkdSDK() {
     })
 
     const response = await result.json()
+    console.log(response.status)
     return response
   }
 }

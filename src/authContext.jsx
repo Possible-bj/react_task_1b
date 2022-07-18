@@ -20,13 +20,16 @@ const reducer = (state, action) => {
         user: action.payload,
         isAuthenticated: true,
         role: action.payload.role,
+        token: action.payload.token,
       }
-    case 'LOGOUT':
+      case 'LOGOUT':
       localStorage.clear()
       return {
         ...state,
         isAuthenticated: false,
         user: null,
+        token: null,
+        role: null,
       }
     default:
       return state
