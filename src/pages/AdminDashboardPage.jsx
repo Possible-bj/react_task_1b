@@ -1,18 +1,35 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useCallback } from 'react'
 import MkdSDK from '../utils/MkdSDK'
-import { useNavigate } from 'react-router-dom'
+import update from 'immutability-helper'
 import { AuthContext, tokenExpireError } from '../authContext'
+import { HTML5Backend } from 'react-dnd-html5-backend'
+import { DndProvider } from 'react-dnd'
 import Card from '../components/Card'
+import Box from '../components/Box'
+import Paginate from '../components/Paginate'
 
 const AdminDashboardPage = () => {
   let sdk = new MkdSDK()
-  const navigate = useNavigate()
-  const { dispatch, state } = React.useContext(AuthContext)
+  const { dispatch } = React.useContext(AuthContext)
 
   const [videos, setVideos] = useState([])
   const [page, setPage] = useState(1)
   const [limit, setLimit] = useState(10)
   const [numPages, setNumPages] = useState(1)
+
+  const moveCard = useCallback((dragIndex, hoverIndex) => {
+    setVideos((prevCards) =>
+      update(prevCards, {
+        $splice: [
+          [dragIndex, 1],
+          [hoverIndex, 0, prevCards[dragIndex]],
+        ],
+      }),
+    )
+  }, [])
+  const renderCard = useCallback((card, index) => {
+    return <Card key={card.id} index={index} video={card} moveCard={moveCard} />
+  }, [])
 
   useEffect(() => {
     ;(async function () {
@@ -50,7 +67,7 @@ const AdminDashboardPage = () => {
   }
 
   return (
-    <>
+    <DndProvider backend={HTML5Backend}>
       <div className='nav-bar-top'>
         <div className='title'>
           <h1>APP</h1>
@@ -63,7 +80,6 @@ const AdminDashboardPage = () => {
         <h1>Videos</h1>
       </div>
       <div className='text-gray-700 dashboard'>
-        {/* <div className='video_card'> */}
         <div className='video-headers'>
           <div className='video-sn-header'>#</div>
           <div className='video-image-header'></div>
@@ -73,22 +89,18 @@ const AdminDashboardPage = () => {
             Most Like <i></i>
           </div>
         </div>
-
-        {videos.map((video, index) => (
-          <Card key={index + 1} video={video} />
-        ))}
-        {/* </div> */}
+        <Box>{videos.map((card, i) => renderCard(card, i))}</Box>
       </div>
       <div className='pagination'>
         <button type='button' className='bg-white' onClick={prevPage}>
           Previous
         </button>
-
+        <Paginate pages={numPages} setPage={setPage} />
         <button type='button' className='bg-white' onClick={nextPage}>
           Next
         </button>
       </div>
-    </>
+    </DndProvider>
   )
 }
 
